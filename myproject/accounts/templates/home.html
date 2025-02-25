@@ -1,24 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+
+{% extends 'base.html' %}
 
 
-    <h2>HOME PAGE </h2>
+{% block content %}
 
-    {% if messages %}
-        {% for rosemane in messages %}
-           <h4> {{ rosemane }} </h4>
+   
+
+        {% if messages %}
+            {% for rosemane in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              <strong>{{ rosemane }}</strong>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            
+            {% endfor %}
+        {% endif %}
+
+        <!-- {% if user.is_authenticated %}
+            <h2>welcome {{user.username}}</h2> 
+        {% endif %} -->
+    <a href="{% url 'add_student' %}" class="btn btn-secondary mt-5">Add student </a>
+
+      {% if students %}
+
+
+
+
+       <table class="table  mt-5">
+        <thead>
+          <tr>
+            <th scope="col">Num</th>
+            <th scope="col">Image</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            
+            <th scope="col">Action</th>
+
+          </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+           
+          <tr>
+            <th scope="row"> {{student.id}} </th>
+            <th scope="row"> 
+              <img src="{{'student.image.url'}}" alt="">
+            </th>
+            <td>{{ student.name }}</td>
+            <td>{{ student.email }} </td>
+            <td> {{student.phone_number}} </td>
+            <td>  <a class=" btn btn-success" href="{% url 'update_student' student.id %}">update</a>
+              <a class=" btn btn-danger" href="{% url 'delete' student.id %}">Delete</a></td>
+            
+          </tr>
+          
+        </tbody>
+        
         {% endfor %}
-    {% endif %}
 
-    {% if user.is_authenticated %}
-        <h2>welcome {{user.username}}</h2> 
-    {% endif %}
-    
-</body>
-</html>
+
+      </table>
+
+
+      {% endif %}
+        
+
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2> page update</h2>
+<div class="col-mb-6 offset-md-3 mt-5">
+
+    <form class="form-group col-md-6" method="post">
+        {% csrf_token %}
+
+        <div class="mb-3 ">
+            <label for="exampleInputEmail1" class="form-label"> Name </label>
+            <input type="text" class="form-control" name="name" value="{{form.name.value}}">
+        </div>
+
+
+        <div class="mb-3 ">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input type="email" class="form-control" name="email" value="{{form.email.value}}">
+        </div>
+
+        <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">PHone</label>
+        <input type="number" name="phone_number" class="form-control" id="exampleInputPassword1" value="{{form.phone_number.value}}">
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+</div>
+
+
+{% endblock %}  
